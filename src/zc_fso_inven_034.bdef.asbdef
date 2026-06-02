@@ -1,0 +1,17 @@
+projection;
+//strict ( 2 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+
+define behavior for ZC_FSO_INVEN_034 alias Inventory
+use etag
+{
+  use create;
+  use update;
+  use delete;
+  use action set_status as setStatus;
+
+//  use action issue_success;
+//  use action issue_info;
+//  use action issue_warning;
+//  use action issue_error;
+//  use action combine; // Output 2 message at once
+}

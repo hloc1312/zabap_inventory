@@ -1,0 +1,39 @@
+ managed implementation in class zbp_i_fso_inven_034 unique;
+ //strict ( 2 );
+
+ define behavior for ZI_FSO_Inven_034 alias Inventory
+ persistent table zfso_inven_034
+ lock master
+ authorization master ( global )
+ etag master LastChangeAt
+ {
+   create;
+   update;
+   delete;
+   field ( readonly, numbering : managed ) Uuid;
+
+   action set_status result [1] $self;
+
+   //   action issue_success;
+   //   static action issue_info;
+   //   static action issue_warning;
+   //   static action issue_error;
+   //   action combine; // Output 2 message at once
+
+   mapping for zfso_inven_034 corresponding
+     {
+       Uuid         = uuid;
+       InventoryId  = inventory_id;
+       ProductId    = product_id;
+       Quantity     = quantity;
+       QuantityUnit = quantity_unit;
+       Price        = price;
+       CurrencyCode = currency_code;
+       Remark       = remark;
+       NotAvailable = not_available;
+       CreateAt     = create_at;
+       CreateBy     = create_by;
+       LastChangeAt = last_change_at;
+       LastChangeBy = last_change_by;
+     }
+ }

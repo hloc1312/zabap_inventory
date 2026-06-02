@@ -1,0 +1,125 @@
+CLASS lhc_Inventory DEFINITION INHERITING FROM CL_ABAP_BEHAVIOR_HANDLER.
+
+  PRIVATE SECTION.
+
+    METHODS SET_STATUS FOR MODIFY
+      IMPORTING KEYS FOR ACTION Inventory~SET_STATUS RESULT RESULT.
+*    METHODS COMBINE FOR MODIFY
+*      IMPORTING KEYS FOR ACTION Inventory~COMBINE.
+*
+*    METHODS ISSUE_ERROR FOR MODIFY
+*      IMPORTING KEYS FOR ACTION Inventory~ISSUE_ERROR.
+*
+*    METHODS ISSUE_INFO FOR MODIFY
+*      IMPORTING KEYS FOR ACTION Inventory~ISSUE_INFO.
+*
+*    METHODS ISSUE_SUCCESS FOR MODIFY
+*      IMPORTING KEYS FOR ACTION Inventory~ISSUE_SUCCESS.
+*
+*    METHODS ISSUE_WARNING FOR MODIFY
+*      IMPORTING KEYS FOR ACTION Inventory~ISSUE_WARNING.
+
+
+
+
+
+ENDCLASS.
+
+CLASS lhc_Inventory IMPLEMENTATION.
+
+  METHOD SET_STATUS.
+
+* Get Inventory is select
+    READ ENTITIES OF ZI_FSO_Inven_034 IN LOCAL MODE
+              ENTITY Inventory
+          ALL FIELDS WITH CORRESPONDING #( KEYS )
+              RESULT DATA(LT_INVEN).
+* Update data
+    MODIFY ENTITIES OF ZI_FSO_Inven_034 IN LOCAL MODE
+                ENTITY Inventory
+                UPDATE
+                FIELDS ( NotAvailable )
+                  WITH VALUE #( FOR LS_INVEN IN LT_INVEN ( %TKY = LS_INVEN-%TKY
+                                    NotAvailable = COND #( WHEN LS_INVEN-NotAvailable = 'X' THEN ''
+                                                           ELSE 'X'  ) ) )
+                FAILED DATA(LS_FAIL)
+              REPORTED DATA(LS_REPORT)
+                MAPPED DATA(LS_RESULT).
+* Get data
+    READ ENTITIES OF ZI_FSO_Inven_034 IN LOCAL MODE
+              ENTITY Inventory
+          ALL FIELDS WITH CORRESPONDING #( KEYS )
+              RESULT DATA(LT_result).
+
+    RESULT = VALUE #( FOR LS_RESULT1 IN LT_result ( %TKY   = LS_RESULT1-%TKY
+                                                    %PARAM = LS_RESULT1 ) ).
+  ENDMETHOD.
+
+*  METHOD COMBINE.
+*    DATA: LO_MSG  TYPE REF TO IF_ABAP_BEHV_MESSAGE,
+*          LO_MSG2 TYPE REF TO IF_ABAP_BEHV_MESSAGE.
+*    LO_MSG = NEW ZCM_INV_034( IM_TEXTID   = ZCM_INV_034=>C_MSG_SUCCESS
+*                              IM_SEVERITY = IF_ABAP_BEHV_MESSAGE=>SEVERITY-SUCCESS ).
+*
+*    LO_MSG2 = NEW ZCM_INV_034( IM_TEXTID   = ZCM_INV_034=>C_MSG_WARNING
+*                               IM_SEVERITY = IF_ABAP_BEHV_MESSAGE=>SEVERITY-INFORMATION ).
+*
+*    READ TABLE KEYS INTO DATA(LS_KEY) INDEX 1.
+*
+*    REPORTED-INVENTORY = VALUE #( ( %PKY = LS_KEY-%PKY
+*                                    %MSG = LO_MSG )
+*                                  ( %PKY = LS_KEY-%PKY
+*                                    %MSG = LO_MSG2 ) ).
+*  ENDMETHOD.
+*
+*  METHOD ISSUE_ERROR.
+*    DATA: LO_MSG TYPE REF TO IF_ABAP_BEHV_MESSAGE.
+*
+*    LO_MSG = NEW ZCM_INV_034( IM_TEXTID      = ZCM_INV_034=>C_MSG_ERROR
+*                              IM_SEVERITY    = IF_ABAP_BEHV_MESSAGE=>SEVERITY-ERROR
+*                              IM_FIELD_OBJ_1 = '123' ).
+*
+*    APPEND LO_MSG TO REPORTED-%OTHER.
+*  ENDMETHOD.
+*
+*  METHOD ISSUE_INFO.
+*    DATA: LO_MSG       TYPE REF TO IF_ABAP_BEHV_MESSAGE.
+*
+*    LO_MSG = NEW ZCM_INV_034( IM_TEXTID   = ZCM_INV_034=>C_MSG_INFOMATION
+*                              IM_SEVERITY = IF_ABAP_BEHV_MESSAGE=>SEVERITY-INFORMATION ).
+*
+*    APPEND LO_MSG TO REPORTED-%OTHER.
+*  ENDMETHOD.
+*
+*  METHOD ISSUE_SUCCESS.
+*    DATA: LO_MSG       TYPE REF TO IF_ABAP_BEHV_MESSAGE,
+*          LS_INVENTORY LIKE LINE OF REPORTED-INVENTORY.
+*    LO_MSG = NEW ZCM_INV_034( IM_TEXTID   = ZCM_INV_034=>C_MSG_SUCCESS
+*                              IM_SEVERITY = IF_ABAP_BEHV_MESSAGE=>SEVERITY-SUCCESS ).
+*
+** cach 1
+**    LOOP AT KEYS INTO DATA(LS_KEY).
+**      CLEAR: LS_INVENTORY.
+**      LS_INVENTORY-%PKY = LS_KEY-%PKY.
+**      LS_INVENTORY-%MSG = LO_MSG.
+**      APPEND LS_INVENTORY TO REPORTED-INVENTORY.
+**ENDLOOP.
+*
+** cach 2
+*    REPORTED-INVENTORY = VALUE #( FOR LS_KEY IN KEYS ( %PKY = LS_KEY-%PKY
+*                                                       %MSG = LO_MSG ) ).
+*
+*  ENDMETHOD.
+*
+*  METHOD ISSUE_WARNING.
+*    DATA: LO_MSG TYPE REF TO IF_ABAP_BEHV_MESSAGE.
+*
+*    LO_MSG = NEW ZCM_INV_034( IM_TEXTID   = ZCM_INV_034=>C_MSG_WARNING
+*                              IM_SEVERITY = IF_ABAP_BEHV_MESSAGE=>SEVERITY-WARNING ).
+*
+*    APPEND LO_MSG TO REPORTED-%OTHER.
+*  ENDMETHOD.
+
+
+
+ENDCLASS.

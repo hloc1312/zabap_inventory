@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Inventory'
+define service ZSD_FSO_INVEN_034 {
+  expose ZC_FSO_INVEN_034;
+}

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZFSO_INV_034</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Message Class</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>This is success message</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Information: this is information message</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>This is very big WARNING!!!!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>An ERROR has occured with object &amp;1</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

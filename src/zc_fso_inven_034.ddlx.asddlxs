@@ -1,0 +1,176 @@
+@Metadata.layer: #CUSTOMER
+@UI:{
+    headerInfo:{
+        typeName: 'Inventory Name',
+        typeNamePlural: 'Inventory Name Plural',
+        title:{
+            type: #STANDARD,
+            label: 'Inventory title',
+            value: 'InventoryId'
+        }
+    },
+    presentationVariant: [{
+        sortOrder: [{
+            by: 'InventoryId',
+            direction: #ASC
+         }],
+         visualizations: [{
+            type: #AS_LINEITEM
+          }]
+     }]
+}
+annotate entity ZC_FSO_INVEN_034 with
+{
+  @UI.facet: [
+    {
+        id: 'idCollection',
+        type: #COLLECTION,
+        label: 'Collection',
+        position: 10
+
+    },
+    {
+        id: 'idIdentification',
+        parentId: 'idCollection',
+        type: #IDENTIFICATION_REFERENCE,
+        label: 'Inventory Identification',
+        position: 10
+    },
+    {
+        id: 'idFieldGr1',
+        parentId: 'idCollection',
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'idFieldGr1',
+        label: 'Field Group Amount',
+        position: 20
+
+    },
+    {
+        id: 'idCollection2',
+        type: #COLLECTION,
+        label: 'Information Remark',
+        position: 20
+
+    },
+    {
+        id: 'idFieldGr2',
+        targetQualifier: 'idFieldGr2',
+        parentId: 'idCollection2',
+        type: #FIELDGROUP_REFERENCE,
+        label: 'Field Group Remark',
+        position: 10
+    }
+
+  ]
+
+  @UI.identification: [{ position: 10 }]
+  @EndUserText.label: 'ID'
+  Uuid;
+
+  @EndUserText.label: 'Inventory ID'
+  @UI.identification: [{ position: 20 }]
+  @UI.lineItem: [{
+    position: 10,
+    importance: #HIGH
+   },
+   {
+     type: #FOR_ACTION,
+     dataAction: 'setStatus',
+     invocationGrouping: #CHANGE_SET,
+     label: 'Set Status'
+   }
+  //   ,
+  //   {
+  //    type: #FOR_ACTION,
+  //    dataAction: 'issue_success',
+  //    label: 'Success'
+  //   },
+  //   {
+  //    type: #FOR_ACTION,
+  //    dataAction: 'issue_info',
+  //    label: 'Infor'
+  //   },
+  //   {
+  //    type: #FOR_ACTION,
+  //    dataAction: 'issue_warning',
+  //    label: 'Warning'
+  //   },
+  //   {
+  //    type: #FOR_ACTION,
+  //    dataAction: 'issue_error',
+  //    label: 'Error'
+  //   },
+  //   {
+  //    type: #FOR_ACTION,
+  //    dataAction: 'combine',
+  //    label: 'Combine'
+  //   }
+   ]
+
+  @UI.selectionField: [{ position: 10 }]
+  InventoryId;
+
+  @UI.lineItem: [{
+    position: 20,
+    importance: #HIGH
+   }]
+
+  @UI.selectionField: [{ position: 20 }]
+  @EndUserText.label: 'Product ID'
+  @UI.identification: [{ position: 30 }]
+  ProductId;
+
+  @UI.lineItem: [{
+    position: 30,
+    importance: #HIGH
+   }]
+  @EndUserText.label: 'Quantity'
+  @UI.fieldGroup: [{ position: 10, qualifier: 'idFieldGr1' }]
+  Quantity;
+
+  @UI.lineItem: [{
+    position: 40
+   }]
+  @EndUserText.label: 'Quantity Unit'
+  QuantityUnit;
+
+  @UI.lineItem: [{
+    position: 50
+   }]
+  @EndUserText.label: 'Price'
+  @UI.fieldGroup: [{ position: 30, qualifier: 'idFieldGr1' }]
+  Price;
+
+  @UI.lineItem: [{
+    position: 60
+   }]
+  @EndUserText.label: 'Currency'
+  CurrencyCode;
+
+  @UI.lineItem: [{
+    position: 70
+   }]
+  @EndUserText.label: 'Remark'
+  @UI.fieldGroup: [{ position: 10, qualifier: 'idFieldGr2' }]
+  Remark;
+
+  @UI.lineItem: [{
+    position: 80
+   }]
+  @EndUserText.label: 'Not Available'
+  @UI.fieldGroup: [{ position: 20, qualifier: 'idFieldGr2' }]
+  NotAvailable;
+
+  @UI.hidden: true
+  CreateBy;
+
+  @UI.hidden: true
+  CreateAt;
+
+  @UI.hidden: true
+  LastChangeBy;
+
+  @UI.hidden: true
+  LastChangeAt;
+
+}
