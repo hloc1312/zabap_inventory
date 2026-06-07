@@ -65,6 +65,7 @@ annotate entity ZC_FSO_INVEN_034 with
 
   @UI.identification: [{ position: 10 }]
   @EndUserText.label: 'ID'
+  @UI.hidden: true
   Uuid;
 
   @EndUserText.label: 'Inventory ID'

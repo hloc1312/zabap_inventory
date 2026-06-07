@@ -32,6 +32,24 @@
      <MSGNR>004</MSGNR>
      <TEXT>An ERROR has occured with object &amp;1</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>FIeld &amp;1 is required. Please input value!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Product ID &amp;1 is not exist in table. Please find another Product</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZFSO_INV_034</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>This data can only edited by its owner &amp;1</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

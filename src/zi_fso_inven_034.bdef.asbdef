@@ -4,13 +4,19 @@
  define behavior for ZI_FSO_Inven_034 alias Inventory
  persistent table zfso_inven_034
  lock master
- authorization master ( global )
+// authorization master ( global )
  etag master LastChangeAt
  {
    create;
    update;
    delete;
    field ( readonly, numbering : managed ) Uuid;
+
+   field (readonly: update) InventoryId;
+
+   field (mandatory) ProductId;
+
+   field (mandatory: create) InventoryId;
 
    action set_status result [1] $self;
 
